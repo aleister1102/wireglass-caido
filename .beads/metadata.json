@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "ws_utils_caido",
+  "project_id": "edbed81f-809a-4b53-8be8-e630102025bb"
+}
