@@ -1,0 +1,46 @@
+{
+  "format": 1,
+  "id": "capitalcom-cp",
+  "name": "Capital.com CP header (source-backed; synthetic fixtures)",
+  "version": 1,
+  "fields": [
+    { "name": "magic", "type": "u16", "endian": "be", "expect": 17232 },
+    { "name": "version", "type": "u8", "expect": 1 },
+    { "name": "destination", "type": "i32", "endian": "be", "lookup": "cp_destinations" },
+    { "name": "payloadLength", "type": "u32", "endian": "be" },
+    { "name": "correlationId", "type": "u32", "endian": "be" },
+    { "name": "tlvCount", "type": "u8" }
+  ],
+  "records": {
+    "countField": "tlvCount",
+    "length": "u8-escape-u16",
+    "types": [
+      { "type": 0, "name": "request uuid", "display": "uuid", "length": 16 },
+      {
+        "type": 6,
+        "name": "encryption",
+        "display": "hex",
+        "length": 1,
+        "rejectPayload": "Encrypted request (record 6): Wireglass does not decrypt CP payloads."
+      },
+      {
+        "type": 13,
+        "name": "encryptedAesKey",
+        "display": "hex",
+        "rejectPayload": "Encrypted handshake (record 13): Wireglass does not decrypt CP payloads."
+      }
+    ]
+  },
+  "payload": { "lengthField": "payloadLength" },
+  "tables": [
+    {
+      "id": "cp_destinations",
+      "entries": [
+        { "value": 3441010, "name": "ping" },
+        { "value": -183853945, "name": "country.getAll.v2" },
+        { "value": 1092358670, "name": "global.settings" },
+        { "value": -1760482774, "name": "static.config.get" }
+      ]
+    }
+  ]
+}
