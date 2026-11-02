@@ -1,0 +1,25 @@
+diff --git a/lz4_wasm_bg.d.ts b/lz4_wasm_bg.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..734d0c837da805d81905857d91076d0b47835d26
+--- /dev/null
++++ b/lz4_wasm_bg.d.ts
+@@ -0,0 +1,4 @@
++export function __wbg_set_wasm(exports: WebAssembly.Exports): void;
++export function compress(input: Uint8Array): Uint8Array;
++export function decompress(input: Uint8Array): Uint8Array;
++export function __wbindgen_string_new(arg0: number, arg1: number): number;
+diff --git a/lz4_wasm_bg.js b/lz4_wasm_bg.js
+index de4ae5490adbec30c077fcc0b0a4a92341d60192..9f80ddae265e3fc3619903f8d5c9b775dc7c752a 100644
+--- a/lz4_wasm_bg.js
++++ b/lz4_wasm_bg.js
+@@ -1,4 +1,9 @@
+-import * as wasm from './lz4_wasm_bg.wasm';
++let wasm;
++
++/** Sets the instance exports used by the functions below. */
++export function __wbg_set_wasm(exports) {
++    wasm = exports;
++}
+ 
+ const lTextDecoder = typeof TextDecoder === 'undefined' ? (0, module.require)('util').TextDecoder : TextDecoder;
+ 

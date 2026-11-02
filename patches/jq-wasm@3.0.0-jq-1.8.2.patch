@@ -1,0 +1,15 @@
+diff --git a/dist/browser.mjs b/dist/browser.mjs
+index cfdb11e92db7324b476b3e88523523b115e6de89..6077ee1fb855a5c740e30e2831f78db824378cf0 100644
+--- a/dist/browser.mjs
++++ b/dist/browser.mjs
+@@ -9,7 +9,9 @@ import {
+ function fromURL(url) {
+   return (reject) => ({ instantiateWasm: streamingHook(url, reject) });
+ }
+-var defaultBuilder = fromURL(new URL("./build/jq.wasm", import.meta.url));
++var defaultBuilder = () => {
++  throw new TypeError("jq-wasm (Wireglass patch): pass wasmBinary; the bundled jq.wasm URL is not available in a blob worker.");
++};
+ var platform = { defaultBuilder, fromURL };
+ var loadJq = makeLoadJq(platform);
+ var { raw, json, first, version } = makeConvenience(loadJq);
