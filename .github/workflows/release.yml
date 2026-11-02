@@ -1,3 +1,4 @@
+# Manual release: signs the built plugin package and publishes it with caido/action-release.
 name: Release
 
 on:
